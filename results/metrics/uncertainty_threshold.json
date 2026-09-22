@@ -1,0 +1,5 @@
+{
+  "confidence_threshold": 0.5,
+  "derived_from": "validation set",
+  "target_accuracy": 0.9
+}
