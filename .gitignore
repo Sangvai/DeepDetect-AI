@@ -4,8 +4,6 @@ __pycache__/
 
 data/raw/
 data/processed/
-models/*.pt
-models/*.pth
 
 .ipynb_checkpoints/
 results/predictions/*
