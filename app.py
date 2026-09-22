@@ -13,8 +13,10 @@ from src.predict import Predictor
 
 DISCLAIMER = (
     "This tool provides an AI-based prediction and is not definitive proof that "
-    "media is real or manipulated. Results may be incorrect, especially for media "
-    "created using unseen generation or manipulation techniques."
+    "media is real or manipulated. It was trained only on StyleGAN-generated faces "
+    "and does NOT reliably detect diffusion-model images (Midjourney, Stable Diffusion, "
+    "etc.) -- confirmed by manual testing. This is a portfolio demonstration, not a "
+    "safety or forensic tool -- do not rely on it for real decisions about real images."
 )
 
 st.set_page_config(page_title="AI-Generated Media & Deepfake Detector")

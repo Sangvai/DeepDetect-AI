@@ -3,6 +3,16 @@
 **Status: trained and evaluated on real data.** Every stage below has actually
 been run — not just written. See [Results](#results) for real numbers.
 
+> **⚠️ Scope limitation — read before using:** this model was trained only on
+> **StyleGAN-generated** faces (see [Dataset](#dataset)). It reliably detects
+> that specific generation method and **does not generalize to diffusion-model
+> images** (Midjourney, Stable Diffusion, DALL-E, Lensa-style avatars, etc.) —
+> tested manually, it misclassifies those as REAL. This is not a bug, it's an
+> unseen-distribution gap (see [Limitations](#limitations)). **Do not use this
+> tool to make real decisions about whether a specific image is AI-generated**
+> — treat it strictly as a portfolio demonstration of the ML workflow, not a
+> reliable detector.
+
 ## Project Overview
 
 A computer-vision system that takes an uploaded face image and predicts whether
@@ -181,10 +191,22 @@ streamlit run app.py
 
 ## Limitations
 
+- **Confirmed by manual testing, not just theory**: this model does not detect
+  diffusion-model-generated images (Midjourney, Stable Diffusion, Lensa-style
+  avatars) — it classifies them as REAL. It was trained exclusively on
+  StyleGAN-generated faces vs. FFHQ photos, and that's the only generation
+  method it can reliably flag. This is a hard, known-unsolved problem industry
+  -wide (generalizing across generator families), not something specific to
+  this implementation — even large-scale industrial detectors struggle with
+  new/unseen generators.
 - Trained on a small (~2,900-image, after face-detection drops) subset of one
-  dataset (StyleGAN-generated faces vs. FFHQ photos) — will likely generalize
-  poorly to other generation methods (diffusion models, face-swap deepfakes,
-  video compression artifacts) it never saw during training.
+  dataset — will likely generalize poorly to other generation methods
+  (diffusion models, face-swap deepfakes, video compression artifacts) it
+  never saw during training.
+- **Not suitable for real decisions about real images** (e.g. determining
+  whether a specific photo used against someone is AI-generated). This is a
+  portfolio project demonstrating the ML workflow, not a safety or forensic
+  tool — a wrong call here could cause real harm if relied upon.
 - Error analysis (above) found the model may be partly relying on framing and
   occlusion as a real/fake signal rather than purely photorealism cues, since
   training fakes were almost always clean and unobstructed — a real,
